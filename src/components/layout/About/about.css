@@ -1,0 +1,9 @@
+.about-page .title-page {
+    padding: 2rem 0;
+    border-bottom: 0.1rem solid var(--light-gray);
+}
+
+.about-page .row h2,
+.about-page .row h3 {
+    font-weight: var(--bold);
+}

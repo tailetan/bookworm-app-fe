@@ -1,0 +1,8 @@
+footer {
+    display: flex;
+}
+
+footer>.logo>img {
+    width: 75px;
+    height: 75px;
+}

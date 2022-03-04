@@ -1,0 +1,64 @@
+@import '../../../assets/css/style.css';
+.shop-page .title-page {
+    padding: 2rem 0;
+    border-bottom: 0.1rem solid var(--light-gray);
+}
+
+.shop-page .title-page>p,
+.book-list .bl-filter,
+.book-list #mainRow .card .card-body .book-title {
+    font-weight: var(--bold);
+}
+
+.shop-page .title-page>p>span {
+    font-weight: var(--light);
+    color: var(--gray);
+}
+
+.book-list {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+}
+
+.book-list .bl-showing {
+    color: var(--gray);
+}
+
+.book-list .bl-main-filter,
+.book-list #mainRow {
+    margin-top: 0.5rem;
+}
+
+.book-list .bl-main-filter .blmf-card {
+    border: 0.1rem solid var(--gray2);
+    border-radius: 0.25rem;
+    padding: 1rem;
+}
+
+.book-list .bl-main-filter .blmf-card:not(:last-child) {
+    margin-bottom: 1.25rem;
+}
+
+.book-list .bl-main-filter .blmf-card .blmfc-title {
+    font-weight: var(--bold);
+    margin-bottom: 0.5rem;
+}
+
+.book-list .bl-main-filter .blmf-card .blmfc-list>li {
+    margin-left: 1rem;
+}
+
+.book-list .bl-main-filter .blmf-card .blmfc-list>li:not(:last-child) {
+    margin-bottom: 0.5rem;
+}
+
+.book-list #mainRow .card>img {
+    width: 100%;
+    max-width: 100%;
+    height: 300px;
+    vertical-align: middle;
+}
+
+.page-link:focus {
+    box-shadow: none !important;
+}

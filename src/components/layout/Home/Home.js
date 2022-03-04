@@ -22,7 +22,7 @@ const arraySrcBook = [Book1, Book2, Book3, Book4, Book5, Book6, Book7, Book8, Bo
 
 function Home() {
 return (
-<section className="home-page">
+<section className="home-page flex-grow-1">
     <div className="container">
         <div className="row align-items-center mb-4">
             <div className="col-lg-6">
