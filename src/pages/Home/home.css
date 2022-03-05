@@ -33,6 +33,17 @@
     font-weight: var(--bold);
 }
 
+.home-page .carousel .card .card-body .book-title,
+.home-page .book-list #mainRow .card .card-body .book-title {
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}
+
 .home-page .book-list .bl-showing {
     color: var(--gray);
 }

@@ -27,3 +27,5 @@ return (
 </div>
 );
 }
+
+export default Register;
