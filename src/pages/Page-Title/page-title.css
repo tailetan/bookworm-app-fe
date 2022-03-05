@@ -1,0 +1,9 @@
+@import '../../assets/css/style.css';
+.title-page {
+    padding: 2rem 0;
+    border-bottom: 0.1rem solid var(--light-gray);
+}
+
+.title-page>h4 {
+    font-weight: var(--bold);
+}

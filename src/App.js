@@ -1,11 +1,11 @@
-import Home from './components/layout/Home/Home';
+import Home from './pages/Home/Home';
 import Header from './components/layout/Header/Header';
 import Footer from './components/layout/Footer/Footer';
-import Shop from './components/layout/Shop/Shop';
-import About from './components/layout/About/About';
-import Cart from './components/layout/Cart/Cart';
-import Title from './components/layout/Page-Title/pageTitle';
-import Product from './components/layout/Product/Product';
+import Shop from './pages/Shop/Shop';
+import About from './pages/About/About';
+import Cart from './pages/Cart/Cart';
+import Title from './pages/Page-Title/pageTitle';
+import Product from './pages/Product/Product';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {

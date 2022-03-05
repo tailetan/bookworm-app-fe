@@ -1,0 +1,21 @@
+.login-modal .modal-header {
+    border-bottom: none;
+}
+
+.login-modal .modal-footer {
+    border-top: none;
+    justify-content: center;
+}
+
+.login-modal .modal-footer .login-btn,
+.login-modal .modal-footer .register-btn {
+    min-width: 250px;
+}
+
+.login-modal .modal-footer .login-btn {
+    width: 100%;
+}
+
+.login-modal .modal-footer .register-btn {
+    width: 70%;
+}
