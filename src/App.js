@@ -8,10 +8,16 @@ import About from './pages/About/About';
 import Cart from './pages/Cart/Cart';
 import PageTitle from './components/Page-Title/pageTitle';
 import Product from './pages/Product/Product';
+
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+
 // import Login from './pages/Login/Login';
 // import Register from './pages/Register/Register';
 import { Routes, Route } from 'react-router-dom';
 
+
+config.autoAddCss = false
 // JS: window.location.pathname ex: /, /shop, /about
 const pathname = window.location.pathname;
 const objectPath = {

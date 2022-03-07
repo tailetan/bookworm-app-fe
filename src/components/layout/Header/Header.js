@@ -1,37 +1,67 @@
 import "./header.css";
+import React from 'react';
+import bookworm from "../../../assets/bookcovers/bookworm.png";
+import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink , UncontrolledDropdown, DropdownToggle,
+DropdownMenu, DropdownItem, NavbarText}from 'reactstrap';
 
 
-function Header(){
-    return(
-        <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top px-5">
-            <a className="navbar-brand" href="#">Logo</a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+  import { faCoffee, faCartShopping, faHome,faShop, faCircleInfo,  } from '@fortawesome/free-solid-svg-icons'
+export default class Header extends React.Component{
+constructor(props) {
+super(props);
 
-            <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
-                <ul className="navbar-nav">
-                    <li className="nav-item active">
-                        <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/shop">Shop</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/about">About</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/cart">Cart(0)</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Sign in</a>
-                    </li>
+this.toggle = this.toggle.bind(this);
+this.state = {
+isOpen: false
+};
+}
+toggle() {
+this.setState({
+isOpen: !this.state.isOpen
+});
+}
+render(){
+return(
 
-                </ul>
+<div className="sticky-top">
+    <Navbar color="light" light expand="md" className="sticky-top px-4">
 
-            </div>
-        </nav>
-    );
+        <NavbarBrand href="/">
+            <img src={ bookworm } alt="Bookworm logo" />
+        </NavbarBrand>
+        <NavbarToggler onClick={this.toggle} />
+        <div className="d-flex justify-content-end">
+            <Collapse isOpen={this.state.isOpen} navbar>
+
+                <Nav className="ml-auto " navbar>
+                    <NavItem>
+                        <NavLink href="/"> <FontAwesomeIcon icon={faHome} /> Home</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink href="/shop"> <FontAwesomeIcon icon={faShop} /> Shop</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink href="/about"> <FontAwesomeIcon icon={faCircleInfo} /> About</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink href="/cart"> <FontAwesomeIcon icon={faCartShopping} /> Cart(0)</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink href="#">Sign in</NavLink>
+                    </NavItem>
+
+                </Nav>
+
+            </Collapse>
+
+        </div>
+    </Navbar>
+</div>
+);
+}
 }
 
-export default Header;
+// export default Header;
+// export default Header;
+// export default Header;
