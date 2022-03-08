@@ -168,7 +168,7 @@ export default class Home extends React.Component {
               {this.state.defaultBooks.map((book) => {
                 return (
                   <div
-                    className="col-lg-3 col-md-4 col-sm-6 mb-4 align-items-stretch"
+                    className="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 align-items-stretch"
                     key={book.id}>
                     <div className="card h-100">
                       <img

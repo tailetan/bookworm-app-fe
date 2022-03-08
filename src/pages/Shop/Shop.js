@@ -11,6 +11,7 @@ import Book8 from '../../assets/bookcovers/book8.jpg';
 import Book9 from '../../assets/bookcovers/book9.jpg';
 import Book10 from '../../assets/bookcovers/book10.jpg';
 import defaultBookCover from '../../assets/bookcovers/defaultBookCover.png';
+import Pagination from 'react-js-pagination';
 
 // import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
@@ -35,16 +36,37 @@ const objectBookCover = {
 export default class Shop extends React.Component {
   // const [dropdownOpen, setDropdownOpen] = useState(false);
   // const [dropdownSort, setDropdownSortOpen] = useState(false);
-  state = {
-    allBooks: [],
-    defaultBooks: [],
+//   state = {
+//     allBooks: [],
+//     defaultBooks: [],
 
-}
-componentDidMount(){
-    axios.get('http://localhost:8000/api/getAllBooks')
+// }
+constructor(props) {
+    super(props);
+    this.state = {
+        allBooks: [], 
+        defaultBooks: [],
+        activePage: 1,
+        itemCountPerPage: 1,
+        totalItemCount: 1,
+        paginate: 5,
+        from: 1,
+        to: undefined
+
+
+     };
+     this.handlePageChange = this.handlePageChange.bind(this);
+  }
+  handlePageChange(pageNumber){
+    axios.get(`http://localhost:8000/api/books?paginate=${this.state.paginate}&page=${pageNumber}`)
     .then(result => {
         // console.log(result.data);
-        const allBooks = result.data;
+        const allBooks = result.data.data;
+        const current_page = result.data.current_page;
+        const per_page = result.data.per_page;
+        const total = result.data.total;
+        const from = result.data.from;
+        const to = result.data.to;
         allBooks.map((book) => (
             Object.keys(book).forEach((key) => {
                 if (key === 'book_cover_photo') {
@@ -56,11 +78,66 @@ componentDidMount(){
                 }
             })
         ))
-        this.setState({ allBooks: allBooks })
+        this.setState({ 
+            allBooks: allBooks,
+            activePage: current_page,
+            itemCountPerPage: per_page,
+            totalItemCount: total,
+            from: from,
+            to: to
+
+
+         })
+        //  console.log(current_page)
     });
+
+  }
+
+  getBookData() {
+     axios.get(`http://localhost:8000/api/books?paginate=${this.state.paginate}&page=${this.state.activePage}`)
+    .then(result => {
+        // console.log(result.data);
+        const allBooks = result.data.data;
+        const current_page = result.data.current_page;
+        const per_page = result.data.per_page;
+        const total = result.data.total;
+        const from = result.data.from;
+        const to = result.data.to;
+        allBooks.map((book) => (
+            Object.keys(book).forEach((key) => {
+                if (key === 'book_cover_photo') {
+                    if (book[key] === null || book[key] === 'null') {
+                        book[key] = defaultBookCover;
+                    } else {
+                        book[key] = objectBookCover[book[key]]
+                    }
+                }
+            })
+        ))
+        this.setState({ 
+            allBooks: allBooks,
+            activePage: current_page,
+            itemCountPerPage: per_page,
+            totalItemCount: total,
+            from: from,
+            to: to
+
+
+         })
+        //  console.log(current_page)
+    });
+
+  }
+
+componentDidMount(){
+    this.getBookData();
 }
 
-  render() {
+render() {
+    // console.log(this.state.allBooks);
+    console.log(this.state.activePage)
+    console.log(this.state.itemCountPerPage)
+    console.log(this.state.totalItemCount)
     return (
       <section className="shop-page flex-grow-1">
         <div className="container">
@@ -116,7 +193,7 @@ componentDidMount(){
               <div className="col-lg-9">
                 <div className="row mb-4">
                   <div className="col-lg-6">
-                    <p className="bl-showing font-14px">Showing 1-12 of 126 books</p>
+                    <p className="bl-showing font-14px">Showing {this.state.from}-{this.state.to} of {this.state.totalItemCount} books</p>
                   </div>
                   <div className="col-lg-6 d-flex justify-content-end">
                     <div className="dropdown me-4">
@@ -166,39 +243,22 @@ componentDidMount(){
                   })}
                 </div>
 
-                <div className="row">
-                  <div className="col-12 d-flex justify-content-center">
-                    <nav>
-                      <ul className="pagination">
-                        <li className="page-item">
-                          <a className="text-color-black page-link" href="#">
-                            Previous
-                          </a>
-                        </li>
-                        <li className="page-item">
-                          <a className="text-color-black page-link" href="#">
-                            1
-                          </a>
-                        </li>
-                        <li className="page-item">
-                          <a className="text-color-black page-link" href="#">
-                            2
-                          </a>
-                        </li>
-                        <li className="page-item">
-                          <a className="text-color-black page-link" href="#">
-                            3
-                          </a>
-                        </li>
-                        <li className="page-item">
-                          <a className="text-color-black page-link" href="#">
-                            Next
-                          </a>
-                        </li>
-                      </ul>
-                    </nav>
-                  </div>
-                </div>
+                <div className="d-flex justify-content-center">
+                            <Pagination
+                                activePage={this.state.activePage}
+                                itemsCountPerPage={this.state.itemCountPerPage}
+                                totalItemsCount={this.state.totalItemCount}
+                                pageRangeDisplayed={3}
+                                 //firstPageText="First"
+                                 prevPageText="Previous"
+                                 nextPageText="Next"
+                                 //lastPageText="Last"
+                                 onChange={this.handlePageChange}
+                                 itemClass='page-item'
+                                 linkClass='page-link'
+                             />
+                             </div>
+                {/* {{!! $book -> link() !!}} */}
               </div>
             </div>
           </div>
