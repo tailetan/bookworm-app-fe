@@ -13,7 +13,7 @@ import Book10 from '../../assets/bookcovers/book10.jpg';
 import defaultBookCover from '../../assets/bookcovers/defaultBookCover.png';
 import Pagination from 'react-js-pagination';
 
-// import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 
 
@@ -43,9 +43,13 @@ export default class Shop extends React.Component {
 // }
 constructor(props) {
     super(props);
+    this.toggle = this.toggle.bind(this);
+    this.show = this.show.bind(this);
     this.state = {
         allBooks: [], 
         defaultBooks: [],
+        dropdownOpen: false,
+        dropdownShow: false,
         activePage: 1,
         itemCountPerPage: 1,
         totalItemCount: 1,
@@ -57,6 +61,19 @@ constructor(props) {
      };
      this.handlePageChange = this.handlePageChange.bind(this);
   }
+
+  toggle() {
+    this.setState((prevState) => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
+  }
+
+  show() {
+    this.setState((prevState) => ({
+      dropdownShow: !prevState.dropdownShow
+    }));
+  }
+  
   handlePageChange(pageNumber){
     axios.get(`http://localhost:8000/api/books?paginate=${this.state.paginate}&page=${pageNumber}`)
     .then(result => {
@@ -197,12 +214,11 @@ render() {
                   </div>
                   <div className="col-lg-6 d-flex justify-content-end">
                     <div className="dropdown me-4">
-                      {/* <Dropdown
-                        isOpen={dropdownSort}
-                        toggle={() => setDropdownSortOpen((prevState) => !prevState)}>
-                        <DropdownToggle caret>Sort by sale</DropdownToggle>
+                    <Dropdown isOpen={this.state.dropdownShow} toggle={this.show}>
+                        <DropdownToggle caret>Sort by on sale</DropdownToggle>
 
                         <DropdownMenu container="body">
+                          <DropdownItem>Sort by on sale</DropdownItem>
                           <DropdownItem>Sort by popularity</DropdownItem>
                           <DropdownItem>Sort by price: low to high</DropdownItem>
                           <DropdownItem>Sort by price: high to low</DropdownItem>
@@ -211,9 +227,7 @@ render() {
                     </div>
 
                     <div>
-                      <Dropdown
-                        isOpen={dropdownOpen}
-                        toggle={() => setDropdownOpen((prevState) => !prevState)}>
+                      <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                         <DropdownToggle caret>Show 5</DropdownToggle>
 
                         <DropdownMenu container="body">
@@ -221,7 +235,7 @@ render() {
                           <DropdownItem>Show 20</DropdownItem>
                           <DropdownItem>Show 25</DropdownItem>
                         </DropdownMenu>
-                      </Dropdown> */}
+                      </Dropdown>
                     </div>
                   </div>
                 </div>
