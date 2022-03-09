@@ -10,6 +10,16 @@
     font-weight: var(--bold);
 }
 
+.book-list #mainRow .card .card-body .book-title {
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}
+
 .shop-page .title-page>p>span {
     font-weight: var(--light);
     color: var(--gray);
@@ -61,4 +71,20 @@
 
 .page-link:focus {
     box-shadow: none !important;
+}
+
+
+/* 
+.accordion-item {
+    padding: 10px;
+}
+
+.accordion-item {
+    max-width: 300px;
+} */
+
+@media only screen and (max-width: 576px) {
+    .shop-page .book-list #mainRow .card>img {
+        height: 100%;
+    }
 }

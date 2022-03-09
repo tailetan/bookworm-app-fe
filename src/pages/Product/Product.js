@@ -1,4 +1,6 @@
 import "./product.css";
+import MyDropdown from '../../components/Dropdown/MyDropdown';
+
 
 function Product(){
     return(
@@ -106,22 +108,14 @@ function Product(){
                     <p>Showing 1-12 of 3134 reviews</p>
                   </div>
                   <div class="col-lg-6 d-flex justify-content-end">
-                    <div class="dropdown mr-4">
-                      <button class="btn btn-secondary dropdown-toggle font-14px" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sort by on sale
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Sort by date: newest to oldest</a>
-                        <a class="dropdown-item" href="#">Sort by date: oldest to newest</a>
-                      </div>
+                    <div class="dropdown me-3">
+                    <MyDropdown title="Sort by" list={["Sort by on sale", "Sort by date: newest to oldest", "Sort by date: oldest to newest"]} />
+
                     </div>
 
                     <div class="dropdown">
-                      <button class="btn btn-secondary dropdown-toggle font-14px" type="button" id="dropdownShowButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Show 20
-                      </button>
+                    <MyDropdown title="Show" list={["Show 5", "Show 15", "Show 20", "Show 25" ]} />
+
                     </div>
                   </div>
                 </div>
