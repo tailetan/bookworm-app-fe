@@ -4,9 +4,6 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-    AccordionItem,
-    Accordion,
-    AccordionHeader
 } from 'reactstrap';
 
 class MyDropdown extends React.Component {

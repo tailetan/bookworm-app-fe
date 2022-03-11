@@ -183,10 +183,18 @@ return (
                     </div>
 
                     <div className="d-flex justify-content-center">
-                        <Pagination activePage={this.state.activePage} itemsCountPerPage={this.state.itemCountPerPage}
-                            totalItemsCount={this.state.totalItemCount} pageRangeDisplayed={3} //firstPageText="First"
-                            prevPageText="Previous" nextPageText="Next" //lastPageText="Last"
-                            onChange={this.handlePageChange} itemClass='page-item' linkClass='page-link' />
+                        <Pagination 
+                        activePage={this.state.activePage} 
+                        itemsCountPerPage={this.state.itemCountPerPage}
+                        totalItemsCount={this.state.totalItemCount} 
+                        pageRangeDisplayed={3} 
+                        //firstPageText="First"
+                        prevPageText="Previous" 
+                        nextPageText="Next" 
+                        //lastPageText="Last"
+                        onChange={this.handlePageChange} 
+                        itemClass='page-item' 
+                        linkClass='page-link' />
                     </div>
                     {/* {{!! $book -> link() !!}} */}
                 </div>

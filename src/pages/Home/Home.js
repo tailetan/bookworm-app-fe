@@ -13,6 +13,7 @@ import Book10 from '../../assets/bookcovers/book10.jpg';
 import defaultBookCover from '../../assets/bookcovers/defaultBookCover.png';
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper';
 import 'swiper/css/navigation';
@@ -100,7 +101,9 @@ export default class Home extends React.Component {
     this.setState({ defaultBooks: this.state.popularBooks });
     this.setState({ recommended: false });
   };
-
+  nextPath(path) {
+    this.props.push(path);
+  }
   render() {
     return (
       <section className="home-page flex-grow-1">
@@ -110,9 +113,12 @@ export default class Home extends React.Component {
               <p>On Sale</p>
             </div>
             <div className="col-lg-6 d-flex justify-content-end">
-              <Button color="secondary" size="sm">
-                View All &nbsp; <i className="fas fa-angle-right"></i>
-              </Button>
+                <Link to={`/shop`}>
+                    <Button  color="secondary" size="sm">
+                        View All &nbsp; <i className="fas fa-angle-right"></i>
+                    </Button>
+                </Link>
+              
             </div>
           </div>
           <Swiper

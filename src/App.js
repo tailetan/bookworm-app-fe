@@ -8,6 +8,7 @@ import About from './pages/About/About';
 import Cart from './pages/Cart/Cart';
 import PageTitle from './components/Page-Title/pageTitle';
 import Product from './pages/Product/Product';
+import Login from './pages/Login/Login';
 
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
@@ -41,6 +42,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/shop/1" element={<Product />} />
           <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
 
         <Footer />

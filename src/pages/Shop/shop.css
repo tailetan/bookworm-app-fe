@@ -88,3 +88,12 @@
         height: 100%;
     }
 }
+
+.pagination .page-item {
+    color: #010F9D;
+}
+
+.pagination .active .page-link {
+    color: #fff !important;
+    background-color: #010F9D !important;
+}

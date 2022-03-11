@@ -7,6 +7,7 @@ DropdownMenu, DropdownItem, NavbarText}from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
   import { faCoffee, faCartShopping, faHome,faShop, faCircleInfo,  } from '@fortawesome/free-solid-svg-icons'
+import { Link } from "react-router-dom";
 export default class Header extends React.Component{
 constructor(props) {
 super(props);
@@ -27,28 +28,28 @@ return(
 <div className="sticky-top">
     <Navbar color="light" light expand="md" className="sticky-top px-4">
 
-        <NavbarBrand href="/">
+        <Link to="/">
             <img src={ bookworm } alt="Bookworm logo" />
-        </NavbarBrand>
+        </Link>
         <NavbarToggler onClick={this.toggle} />
         <div className="d-flex justify-content-end">
             <Collapse isOpen={this.state.isOpen} navbar>
 
                 <Nav className="ml-auto " navbar>
                     <NavItem>
-                        <NavLink href="/"> <FontAwesomeIcon icon={faHome} /> Home</NavLink>
+                        <Link to="/"> <FontAwesomeIcon icon={faHome} /> Home</Link>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="/shop"> <FontAwesomeIcon icon={faShop} /> Shop</NavLink>
+                        <Link href="/shop"> <FontAwesomeIcon icon={faShop} /> Shop</Link>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="/about"> <FontAwesomeIcon icon={faCircleInfo} /> About</NavLink>
+                        <Link to="/about"> <FontAwesomeIcon icon={faCircleInfo} /> About</Link>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="/cart"> <FontAwesomeIcon icon={faCartShopping} /> Cart(0)</NavLink>
+                        <Link to="/cart"> <FontAwesomeIcon icon={faCartShopping} /> Cart(0)</Link>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="#">Sign in</NavLink>
+                        <Link to="/login">Sign in</Link>
                     </NavItem>
 
                 </Nav>
