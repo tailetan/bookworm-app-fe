@@ -10,15 +10,14 @@ import PageTitle from './components/Page-Title/pageTitle';
 import Product from './pages/Product/Product';
 import Login from './pages/Login/Login';
 
-import { config } from '@fortawesome/fontawesome-svg-core'
-import '@fortawesome/fontawesome-svg-core/styles.css'
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 
 // import Login from './pages/Login/Login';
 // import Register from './pages/Register/Register';
 import { Routes, Route } from 'react-router-dom';
 
-
-config.autoAddCss = false
+config.autoAddCss = false;
 // JS: window.location.pathname ex: /, /shop, /about
 const pathname = window.location.pathname;
 const objectPath = {
@@ -40,12 +39,14 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/shop/1" element={<Product />} />
+          <Route path="/shop/:id" element={<Product />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
         </Routes>
 
         <Footer />
+
+        {/* Authenticate Modal */}
       </div>
     </React.Fragment>
   );

@@ -1,0 +1,141 @@
+.detail-page {
+  margin: 2rem 0;
+}
+
+.detail-page .title-section {
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+}
+
+.card.card-book img {
+  width: 100%;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.card.card-book p.author span {
+  font-weight: var(--medium);
+}
+
+.card.card-book .book-detail-layout {
+  margin-right: 0.938rem;
+}
+
+.detail-page .title-page,
+.card.card-book p.book-title,
+.card.card-review p.book-title span:first-child,
+.card.card-review .star-row .point,
+.card.card-add-to-card span.price-sale,
+.card.card-write .card-header p {
+  font-weight: var(--bold);
+}
+
+.card.card-review .star-row .number {
+  font-weight: var(--medium);
+  text-decoration: underline;
+}
+
+.card.card-review ul.list-start {
+  display: flex;
+}
+
+.card.card-review ul.list-start li:first-child {
+  padding-left: 0;
+}
+
+.card.card-review ul.list-start li {
+  padding: 0 0.5rem 0 0.5rem;
+  text-decoration: underline;
+}
+
+.card.card-review ul.list-start li:not(:last-child) {
+  border-right: 1px solid var(--black);
+}
+
+.review-content {
+  margin: 1rem 0;
+  border-bottom: 2px solid var(--gray2);
+}
+
+.review-content .rc-title {
+  font-weight: var(--bold);
+}
+
+.review-content .rc-title span {
+  font-weight: var(--light);
+  font-size: var(--base);
+}
+
+.review-content .rc-content {
+  margin: 1rem 0;
+}
+
+.review-content .rc-day {
+  padding-bottom: 1rem;
+}
+
+.card.card-add-to-card span.price-first {
+  color: var(--gray);
+}
+
+.card.card-add-to-card span.price-first.price-first-line {
+  text-decoration-line: line-through;
+}
+
+.card.card-add-to-card .card-body .cb-content {
+  padding: 4rem 2rem;
+}
+
+.card.card-add-to-card .card-body .cb-content .label {
+  font-weight: var(--medium);
+}
+
+.card.card-add-to-card .card-body .cb-content .quantity {
+  display: flex;
+  align-items: center;
+  background-color: var(--light-gray);
+  border-radius: 0.375rem;
+  margin-top: 0.5rem;
+}
+
+.card.card-add-to-card .card-body .cb-content .quantity i {
+  color: var(--gray);
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.card.card-add-to-card .card-body .cb-content .quantity span {
+  flex: 1;
+  text-align: center;
+  padding: 1rem;
+}
+
+.card.card-add-to-card .card-body .cb-content a.add-btn,
+.card.card-write .card-footer a.submit-btn {
+  background-color: var(--light-gray);
+  display: flex;
+  border-radius: 0.375rem;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  color: var(--black);
+  font-weight: var(--bold);
+  cursor: pointer;
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+.card.card-add-to-card .card-body .cb-content a.add-btn:hover,
+.card.card-write .card-footer a.submit-btn {
+  text-decoration: none;
+}
+
+.list-start {
+  padding-left: 0 !important;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed !important;
+}

@@ -4,6 +4,11 @@
     border-bottom: 0.1rem solid var(--light-gray);
 }
 
+.shop-page a,
+.shop-page a:hover {
+    color: inherit;
+}
+
 .shop-page .title-page>p,
 .book-list .bl-filter,
 .book-list #mainRow .card .card-body .book-title {

@@ -24,7 +24,6 @@ p {
 
 a {
     text-decoration: none !important;
-    color: inherit !important;
 }
 
 ul,
@@ -100,4 +99,33 @@ input[type=number]:focus,
 .btn-link {
     text-decoration: none !important;
     color: inherit !important;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.text-dark-blue {
+    color: var(--darkblue);
+}
+
+.background-dark-blue {
+    background-color: var(--darkblue) !important;
+}
+
+.modal-title {
+    width: 100%;
+}
+
+.border-error {
+    outline: 2px solid red !important;
+}
+
+.Toastify__toast {
+    font-family: var(--font), sans-serif !important;
+}
+
+.Toastify__toast-theme--light {
+    background: #dbf7e8 !important;
+    color: #369b61 !important;
 }

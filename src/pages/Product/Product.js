@@ -1,219 +1,405 @@
-import "./product.css";
-import MyDropdown from '../../components/Dropdown/MyDropdown';
+import './product.css';
+// import MyDropdown from '../../components/Dropdown/MyDropdown';
+import React from 'react';
+import axios from 'axios';
 
+import Book1 from '../../assets/bookcovers/book1.jpg';
+import Book2 from '../../assets/bookcovers/book2.jpg';
+import Book3 from '../../assets/bookcovers/book3.jpg';
+import Book4 from '../../assets/bookcovers/book4.jpg';
+import Book5 from '../../assets/bookcovers/book5.jpg';
+import Book6 from '../../assets/bookcovers/book6.jpg';
+import Book7 from '../../assets/bookcovers/book7.jpg';
+import Book8 from '../../assets/bookcovers/book8.jpg';
+import Book9 from '../../assets/bookcovers/book9.jpg';
+import Book10 from '../../assets/bookcovers/book10.jpg';
+import defaultBookCover from '../../assets/bookcovers/defaultBookCover.png';
+import { ToastContainer, toast } from 'react-toastify';
 
-function Product(){
-    return(
-        <section class="detail-page flex-grow-1">
-    <div class="container">
-      <div class="title-section">
-        <p class="title-page font-22px">Category Name</p>
-      </div>
+export default class Product extends React.Component {
+  constructor(props) {
+    super(props);
 
-      <div>
-        <div class="row">
-          <div class="col-lg-8">
-            <div class="card card-book">
-              <div class="row">
-                <div class="col-lg-4">
-                  <img class="card-img-top" src="./assets/images/books.jpg" alt="Books" />
-                  <p class="author text-right mt-3">By (author) <span>Anna Banks</span></p>
+    this.setPlusQuantity = this.setPlusQuantity.bind(this);
+    this.setMinusQuantity = this.setMinusQuantity.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+    this.state = {
+      details: {}
+    };
+  }
+
+  getDetail() {
+    const a = window.location.pathname;
+    const id = a.split('/shop/')[1];
+    const url = 'http://localhost:8000/api/book/' + id;
+    axios.get(url).then((result) => {
+      const objectBookCover = {
+        book1: Book1,
+        book2: Book2,
+        book3: Book3,
+        book4: Book4,
+        book5: Book5,
+        book6: Book6,
+        book7: Book7,
+        book8: Book8,
+        book9: Book9,
+        book10: Book10
+      };
+      Object.keys(result.data[0]).forEach((x) => {
+        if (x === 'book_cover_photo') {
+          if (result.data[0][x] === null) {
+            result.data[0][x] = defaultBookCover;
+          } else {
+            result.data[0][x] = objectBookCover[result.data[0][x]];
+          }
+        }
+        if (x === 'avg_rating') {
+          if (result.data[0][x] === null) {
+            result.data[0][x] = 0;
+          }
+        }
+        if (x === 'book_price') {
+          result.data[0][x] = parseFloat(result.data[0][x]).toFixed(2);
+        }
+
+        if (x === 'discount_price') {
+          if (result.data[0][x] !== null) {
+            result.data[0][x] = parseFloat(result.data[0][x]).toFixed(2);
+          }
+        }
+      });
+      result.data[0]['quantity'] = 1;
+      this.setState({ details: {...result.data[0]} });
+    });
+  }
+
+  setPlusQuantity() {
+    if (this.state.details.quantity < 8) {
+      this.setState((prevState) => ({
+        details: {
+          ...prevState.details,
+          quantity: prevState.details.quantity + 1
+        }
+      }));
+    }
+  }
+
+  setMinusQuantity() {
+    if (this.state.details.quantity > 1) {
+      this.setState((prevState) => ({
+        details: {
+          ...prevState.details,
+          quantity: prevState.details.quantity - 1
+        }
+      }));
+    }
+  }
+
+  addToCart() {
+    const cart = localStorage.getItem('cart');
+    if (cart !== null) {
+        const cartObject = {...this.state.details};
+      const cartArray = [...JSON.parse(cart)];
+      cartArray.push(cartObject);
+      localStorage.setItem('cart', JSON.stringify(cartArray));
+      toast.success('Added successfully', {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined
+      });
+    } else {
+      const cartObject = {...this.state.details};
+      const cartArray = [];
+      cartArray.push(cartObject);
+      localStorage.setItem('cart', JSON.stringify(cartArray));
+      toast.success('Added successfully', {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined
+      });
+    }
+  }
+
+  componentDidMount() {
+    this.getDetail();
+  }
+
+  render() {
+    return (
+      <section className="detail-page flex-grow-1">
+        <ToastContainer />
+        <div className="container">
+          <div className="title-section">
+            <p className="title-page font-22px">Category: {this.state.details.category_name}</p>
+          </div>
+
+          <div>
+            <div className="row">
+              <div className="col-lg-8">
+                <div className="card card-book">
+                  <div className="row">
+                    <div className="col-lg-4">
+                      <img
+                        className="card-img-top"
+                        width="100%"
+                        height="340px"
+                        src={this.state.details.book_cover_photo}
+                        alt="Books"
+                      />
+                      <p className="author text-right mt-3">
+                        By (author) <span>{this.state.details.author_name}</span>
+                      </p>
+                    </div>
+                    <div className="col-lg-8">
+                      <div className="book-detail-layout">
+                        <br />
+                        <p className="book-title font-22px">{this.state.details.book_title}</p>
+                        <br />
+                        <p>Book description</p>
+                        <p>{this.state.details.book_summary}</p>
+                        <br />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-lg-8">
-                  <div class="book-detail-layout">
-                    <br />
-                    <p class="book-title font-22px">Book Title</p>
-                    <br />
-                    <p>Book description</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat eligendi inventore impedit
-                      repellendus mollitia totam expedita a nam. Doloremque at eveniet obcaecati expedita. Soluta
-                      officia
-                      esse ipsa tempore, aliquid voluptatum?</p>
-                    <br />
-                    <p>"The multi-million copy bestseller"</p>
-                    <p>Soon to be a major fim</p>
-                    <p>A Number One New York Times Bestseller</p>
-                    <br />
-                    <p>'Painfully beautiful New York Times'</p>
-                    <p>'Unforgettable...as engrossing as it is moving' Daily Mail</p>
-                    <p>'A rare achievement' The Times</p>
-                    <p>'I can't even express how much I love this book!' Reese Witherspoon</p>
-                    <br />
+              </div>
+              <div className="col-lg-4">
+                <div className="card card-add-to-card">
+                  <div className="card-header">
+                    <span
+                      className={`price-first ${
+                        this.state.details.discount_price !== null ? 'price-first-line' : ''
+                      }`}>
+                      $
+                      {parseFloat(
+                        this.state.details.book_price * this.state.details.quantity
+                      ).toFixed(2)}
+                    </span>
+                    {this.state.details.discount_price !== null ? (
+                      <span className="price-sale font-22px ms-2">
+                        $
+                        {parseFloat(
+                          this.state.details.discount_price * this.state.details.quantity
+                        ).toFixed(2)}
+                      </span>
+                    ) : (
+                      ''
+                    )}
+                  </div>
+                  <div className="card-body">
+                    <div className="cb-content">
+                      <p className="label">Quantity</p>
+                      <div className="quantity">
+                        <i
+                          className={`fas fa-minus ${
+                            this.state.details.quantity === 1 ? 'cursor-not-allowed' : ''
+                          }`}
+                          onClick={this.setMinusQuantity}></i>
+                        <span>{this.state.details.quantity}</span>
+                        <i
+                          className={`fas fa-plus ${
+                            this.state.details.quantity === 8 ? 'cursor-not-allowed' : ''
+                          }`}
+                          onClick={this.setPlusQuantity}></i>
+                      </div>
+                      <br />
+                      <br />
+                      <a className="add-btn" onClick={this.addToCart}>
+                        Add to cart
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="card card-add-to-card">
-              <div class="card-header">
-                <span class="price-first">$49.99</span>
-                <span class="price-sale font-22px">$29.99</span>
-              </div>
-              <div class="card-body">
-                <div class="cb-content">
-                  <p class="label">Quantity</p>
-                  <div class="quantity">
-                    <i class="fas fa-minus"></i>
-                    <span>1</span>
-                    <i class="fas fa-plus"></i>
+            <br />
+            <div className="row">
+              <div className="col-lg-8">
+                <div className="card card-review bg-white-smoke">
+                  <div className="card-body">
+                    <p className="book-title">
+                      <span className="font-22px">Customer Reviews</span>
+                      <span>(Filtered by 5 star)</span>
+                    </p>
+                    <br />
+                    <div className="row star-row">
+                      <div className="col-lg-2">
+                        <p className="point font-24px">{this.state.details.avg_rating}</p>
+                        <p className="number">(3,134)</p>
+                      </div>
+                      <div className="col-lg-10">
+                        <p className="point font-24px">Star</p>
+                        <ul className="list-start">
+                          <li>5 star ({this.state.details.five_star})</li>
+                          <li>4 star ({this.state.details.four_star})</li>
+                          <li>3 star ({this.state.details.three_star})</li>
+                          <li>2 star ({this.state.details.two_star})</li>
+                          <li>1 star ({this.state.details.one_star})</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <br />
+                    {/* <div className="row">
+                      <div className="col-lg-6">
+                        <p>Showing 1-12 of 3134 reviews</p>
+                      </div>
+                      <div className="col-lg-6 d-flex justify-content-end">
+                        <div className="dropdown me-3">
+                          <MyDropdown
+                            title="Sort by"
+                            list={[
+                              'Sort by on sale',
+                              'Sort by date: newest to oldest',
+                              'Sort by date: oldest to newest'
+                            ]}
+                          />
+                        </div>
+
+                        <div className="dropdown">
+                          <MyDropdown
+                            title="Show"
+                            list={['Show 5', 'Show 15', 'Show 20', 'Show 25']}
+                          />
+                        </div>
+                      </div>
+                    </div> */}
+
+                    {/* <!-- Start 1 component --> */}
+                    {/* <div className="review-content">
+                      <p className="rc-title font-22px">
+                        Review Title <span> | 5 starts</span>
+                      </p>
+                      <p className="rc-content">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis numquam
+                        porro error totam, exercitationem optio blanditiis nostrum quia?
+                      </p>
+                      <p className="rc-day font-14px">Month Date, Year</p>
+                    </div> */}
+                    {/* <!-- End 1 component --> */}
+                    {/* <!-- Start 1 component --> */}
+                    {/* <div className="review-content">
+                      <p className="rc-title font-22px">
+                        Amazing Story! You will LOVE it <span> | 5 starts</span>
+                      </p>
+                      <p className="rc-content">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis numquam
+                        porro error totam, exercitationem optio blanditiis nostrum quia?
+                      </p>
+                      <p className="rc-day font-14px">April 12, 2021</p>
+                    </div> */}
+                    {/* <!-- End 1 component --> */}
+                    {/* <!-- Start 1 component --> */}
+                    {/* <div className="review-content">
+                      <p className="rc-title font-22px">
+                        Amazing Story! You will LOVE it <span> | 5 starts</span>
+                      </p>
+                      <p className="rc-content">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis numquam
+                        porro error totam, exercitationem optio blanditiis nostrum quia?
+                      </p>
+                      <p className="rc-day font-14px">April 12, 2021</p>
+                    </div> */}
+                    {/* <!-- End 1 component --> */}
+                    {/* <!-- Start 1 component --> */}
+                    {/* <div className="review-content">
+                      <p className="rc-title font-22px">
+                        Amazing Story! You will LOVE it <span> | 5 starts</span>
+                      </p>
+                      <p className="rc-content">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis numquam
+                        porro error totam, exercitationem optio blanditiis nostrum quia?
+                      </p>
+                      <p className="rc-day font-14px">April 12, 2021</p>
+                    </div> */}
+                    {/* <!-- End 1 component --> */}
+                    {/* <!-- Start 1 component --> */}
+                    {/* <div className="review-content">
+                      <p className="rc-title font-22px">
+                        Amazing Story! You will LOVE it <span> | 5 starts</span>
+                      </p>
+                      <p className="rc-content">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis numquam
+                        porro error totam, exercitationem optio blanditiis nostrum quia?
+                      </p>
+                      <p className="rc-day font-14px">April 12, 2021</p>
+                    </div> */}
+                    {/* <!-- End 1 component --> */}
+                    {/* <div className="row">
+                      <div className="col-12 d-flex justify-content-center">
+                        <nav>
+                          <ul className="pagination">
+                            <li className="page-item">
+                              <a className="text-color-black page-link" href="#">
+                                Previous
+                              </a>
+                            </li>
+                            <li className="page-item">
+                              <a className="text-color-black page-link" href="#">
+                                1
+                              </a>
+                            </li>
+                            <li className="page-item">
+                              <a className="text-color-black page-link" href="#">
+                                2
+                              </a>
+                            </li>
+                            <li className="page-item">
+                              <a className="text-color-black page-link" href="#">
+                                3
+                              </a>
+                            </li>
+                            <li className="page-item">
+                              <a className="text-color-black page-link" href="#">
+                                Next
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
+                    </div> */}
                   </div>
-                  <br />
-                  <br />
-                  <a class="add-btn">Add to cart</a>
+                </div>
+              </div>
+              <div className="col-lg-4">
+                <div className="card card-write">
+                  <div className="card-header bg-white">
+                    <p className="font-22px">Write a Review</p>
+                  </div>
+                  <div className="card-body">
+                    <p>Add a title</p>
+                    <input className="form-control" />
+                    <br />
+                    <br />
+                    <p>Details please! Your review helps other shoppers</p>
+                    <textarea className="form-control"></textarea>
+                    <br />
+                    <br />
+                    <p>Select a rating star</p>
+                    <select className="form-control">
+                      <option>1 Star</option>
+                      <option>2 Star</option>
+                      <option>3 Star</option>
+                      <option>4 Star</option>
+                      <option>5 Star</option>
+                    </select>
+                  </div>
+                  <div className="card-footer bg-white">
+                    <a className="submit-btn">Submit Review</a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <br />
-        <div class="row">
-          <div class="col-lg-8">
-            <div class="card card-review bg-white-smoke">
-              <div class="card-body">
-                <p class="book-title">
-                  <span class="font-22px">Customer Reviews</span>
-                  <span>(Filtered by 5 star)</span>
-                </p>
-                <br />
-                <div class="row star-row">
-                  <div class="col-lg-2">
-                    <p class="point font-24px">4.6</p>
-                    <p class="number">(3,134)</p>
-                  </div>
-                  <div class="col-lg-10">
-                    <p class="point font-24px">Star</p>
-                    <ul class="list-start">
-                      <li>
-                        5 star (200)
-                      </li>
-                      <li>
-                        4 star (100)
-                      </li>
-                      <li>
-                        3 star (20)
-                      </li>
-                      <li>
-                        2 star (5)
-                      </li>
-                      <li>
-                        1 star (0)
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <br />
-                <div class="row">
-                  <div class="col-lg-6">
-                    <p>Showing 1-12 of 3134 reviews</p>
-                  </div>
-                  <div class="col-lg-6 d-flex justify-content-end">
-                    <div class="dropdown me-3">
-                    <MyDropdown title="Sort by" list={["Sort by on sale", "Sort by date: newest to oldest", "Sort by date: oldest to newest"]} />
-
-                    </div>
-
-                    <div class="dropdown">
-                    <MyDropdown title="Show" list={["Show 5", "Show 15", "Show 20", "Show 25" ]} />
-
-                    </div>
-                  </div>
-                </div>
-
-                {/* <!-- Start 1 component --> */}
-                <div class="review-content">
-                  <p class="rc-title font-22px">Review Title <span> | 5 starts</span></p>
-                  <p class="rc-content">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis numquam
-                    porro error totam,
-                    exercitationem optio blanditiis nostrum quia?</p>
-                  <p class="rc-day font-14px">Month Date, Year</p>
-                </div>
-                {/* <!-- End 1 component --> */}
-                {/* <!-- Start 1 component --> */}
-                <div class="review-content">
-                  <p class="rc-title font-22px">Amazing Story! You will LOVE it <span> | 5 starts</span></p>
-                  <p class="rc-content">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis numquam
-                    porro error totam,
-                    exercitationem optio blanditiis nostrum quia?</p>
-                  <p class="rc-day font-14px">April 12, 2021</p>
-                </div>
-                {/* <!-- End 1 component --> */}
-                {/* <!-- Start 1 component --> */}
-                <div class="review-content">
-                  <p class="rc-title font-22px">Amazing Story! You will LOVE it <span> | 5 starts</span></p>
-                  <p class="rc-content">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis numquam
-                    porro error totam,
-                    exercitationem optio blanditiis nostrum quia?</p>
-                  <p class="rc-day font-14px">April 12, 2021</p>
-                </div>
-                {/* <!-- End 1 component --> */}
-                {/* <!-- Start 1 component --> */}
-                <div class="review-content">
-                  <p class="rc-title font-22px">Amazing Story! You will LOVE it <span> | 5 starts</span></p>
-                  <p class="rc-content">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis numquam
-                    porro error totam,
-                    exercitationem optio blanditiis nostrum quia?</p>
-                  <p class="rc-day font-14px">April 12, 2021</p>
-                </div>
-                {/* <!-- End 1 component --> */}
-                {/* <!-- Start 1 component --> */}
-                <div class="review-content">
-                  <p class="rc-title font-22px">Amazing Story! You will LOVE it <span> | 5 starts</span></p>
-                  <p class="rc-content">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis numquam
-                    porro error totam,
-                    exercitationem optio blanditiis nostrum quia?</p>
-                  <p class="rc-day font-14px">April 12, 2021</p>
-                </div>
-                {/* <!-- End 1 component --> */}
-                <div class="row">
-                  <div class="col-12 d-flex justify-content-center">
-                    <nav>
-                      <ul class="pagination">
-                        <li class="page-item"><a class="text-color-black page-link" href="#">Previous</a></li>
-                        <li class="page-item"><a class="text-color-black page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="text-color-black page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="text-color-black page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="text-color-black page-link" href="#">Next</a></li>
-                      </ul>
-                    </nav>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="card card-write">
-              <div class="card-header bg-white">
-                <p class="font-22px">Write a Review</p>
-              </div>
-              <div class="card-body">
-                <p>Add a title</p>
-                <input class="form-control"/>
-                <br />
-                <br />
-                <p>Details please! Your review helps other shoppers</p>
-                <textarea class="form-control"></textarea>
-                <br />
-                <br />
-                <p>Select a rating star</p>
-                <select class="form-control">
-                  <option>1 Star</option>
-                  <option>2 Star</option>
-                  <option>3 Star</option>
-                  <option>4 Star</option>
-                  <option>5 Star</option>
-                </select>
-              </div>
-              <div class="card-footer bg-white">
-                <a class="submit-btn">Submit Review</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+      </section>
     );
+  }
 }
-
-export default Product;

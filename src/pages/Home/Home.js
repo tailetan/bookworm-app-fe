@@ -101,9 +101,9 @@ export default class Home extends React.Component {
     this.setState({ defaultBooks: this.state.popularBooks });
     this.setState({ recommended: false });
   };
-  nextPath(path) {
-    this.props.push(path);
-  }
+  // nextPath(path) {
+  //   this.props.push(path);
+  // }
   render() {
     return (
       <section className="home-page flex-grow-1">
@@ -113,12 +113,11 @@ export default class Home extends React.Component {
               <p>On Sale</p>
             </div>
             <div className="col-lg-6 d-flex justify-content-end">
-                <Link to={`/shop`}>
-                    <Button  color="secondary" size="sm">
-                        View All &nbsp; <i className="fas fa-angle-right"></i>
-                    </Button>
-                </Link>
-              
+              <Link to={`/shop`}>
+                <Button color="secondary" size="sm">
+                  View All &nbsp; <i className="fas fa-angle-right"></i>
+                </Button>
+              </Link>
             </div>
           </div>
           <Swiper
@@ -135,7 +134,7 @@ export default class Home extends React.Component {
             {this.state.onSaleBooks.map((book, idx) => {
               return (
                 <SwiperSlide key={idx} className="carousel">
-                  <div className="card h-100">
+                  <a href={`shop/${book.id}`} className="card h-100">
                     <img
                       className="card-img-top img-fluid"
                       src={book.book_cover_photo}
@@ -148,7 +147,7 @@ export default class Home extends React.Component {
                     <div className="card-footer text-muted font-14px">
                       <strike>${book.book_price}</strike> <strong>${book.discount_price}</strong>
                     </div>
-                  </div>
+                  </a>
                 </SwiperSlide>
               );
             })}
@@ -173,7 +172,8 @@ export default class Home extends React.Component {
             <div id="mainRow" className="row">
               {this.state.defaultBooks.map((book) => {
                 return (
-                  <div
+                  <a
+                    href={`shop/${book.id}`}
                     className="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 align-items-stretch"
                     key={book.id}>
                     <div className="card h-100">
@@ -188,7 +188,7 @@ export default class Home extends React.Component {
                       </div>
                       <div className="card-footer text-muted font-14px">${book.final_price}</div>
                     </div>
-                  </div>
+                  </a>
                 );
               })}
             </div>

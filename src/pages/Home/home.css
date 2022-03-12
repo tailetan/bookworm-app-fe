@@ -3,6 +3,11 @@
     margin: 1rem 0;
 }
 
+.home-page a,
+.home-page a:hover {
+    color: inherit;
+}
+
 .custom-link,
 .custom-link:hover {
     display: inline-block;
