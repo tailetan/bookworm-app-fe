@@ -126,12 +126,13 @@ export default class Product extends React.Component {
         progress: undefined
       });
     }
+
+
   }
 
   componentDidMount() {
     this.getDetail();
   }
-
   render() {
     return (
       <section className="detail-page flex-grow-1">
@@ -154,8 +155,8 @@ export default class Product extends React.Component {
                         src={this.state.details.book_cover_photo}
                         alt="Books"
                       />
-                      <p className="author text-right mt-3">
-                        By (author) <span>{this.state.details.author_name}</span>
+                      <p className="author text-right my-3 ms-3">
+                        By (author): <strong>{this.state.details.author_name}</strong>
                       </p>
                     </div>
                     <div className="col-lg-8">
@@ -163,7 +164,7 @@ export default class Product extends React.Component {
                         <br />
                         <p className="book-title font-22px">{this.state.details.book_title}</p>
                         <br />
-                        <p>Book description</p>
+                        <h5>Book description</h5>
                         <p>{this.state.details.book_summary}</p>
                         <br />
                       </div>
@@ -176,7 +177,7 @@ export default class Product extends React.Component {
                   <div className="card-header">
                     <span
                       className={`price-first ${
-                        this.state.details.discount_price !== null ? 'price-first-line' : ''
+                        this.state.details.discount_price !== null ? 'price-first-line' : 'ps-3 text-dark h4'
                       }`}>
                       $
                       {parseFloat(
@@ -233,15 +234,15 @@ export default class Product extends React.Component {
                     <div className="row star-row">
                       <div className="col-lg-2">
                         <p className="point font-24px">{this.state.details.avg_rating}</p>
-                        <p className="number">(3,134)</p>
+                        <p className="number">({this.state.details.total_review})</p>
                       </div>
                       <div className="col-lg-10">
                         <p className="point font-24px">Star</p>
                         <ul className="list-start">
-                          <li>5 star ({this.state.details.five_star})</li>
-                          <li>4 star ({this.state.details.four_star})</li>
-                          <li>3 star ({this.state.details.three_star})</li>
-                          <li>2 star ({this.state.details.two_star})</li>
+                          <li>5 stars ({this.state.details.five_star})</li>
+                          <li>4 stars ({this.state.details.four_star})</li>
+                          <li>3 stars ({this.state.details.three_star})</li>
+                          <li>2 stars ({this.state.details.two_star})</li>
                           <li>1 star ({this.state.details.one_star})</li>
                         </ul>
                       </div>

@@ -124,9 +124,9 @@ export default class Shop extends React.Component {
       <section className="shop-page flex-grow-1">
         <div className="container">
           <div className="title-page">
-            <p>
-              Books <span>(Filtered by Category #1)</span>
-            </p>
+              <h4 className='d-inline'>
+                  Books </h4><span >(Filtered by Category #1)</span>
+
           </div>
 
           <div className="book-list">
@@ -204,7 +204,6 @@ export default class Shop extends React.Component {
                     linkClass="page-link"
                   />
                 </div>
-                {/* {{!! $book -> link() !!}} */}
               </div>
             </div>
           </div>

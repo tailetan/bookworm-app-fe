@@ -38,7 +38,7 @@ function SignupForm() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <ModalBody>
         <div className="mb-3">
-          <p className="mb-2">Email *</p>
+          <p className="mb-2">Email <span className='text-danger'>*</span></p>
           <input
             type="text"
             placeholder="Email"
@@ -57,7 +57,7 @@ function SignupForm() {
           {errors.email && <small className="text-danger">{errors.email.message}</small>}
         </div>
         <div className="mb-3">
-          <p className="mb-2">First name *</p>
+          <p className="mb-2">First name <span className='text-danger'>*</span></p>
           <input
             type="text"
             placeholder="First name"
@@ -70,7 +70,7 @@ function SignupForm() {
           {errors.first_name && <small className="text-danger">{errors.first_name.message}</small>}
         </div>
         <div className="mb-3">
-          <p className="mb-2">Last name *</p>
+          <p className="mb-2">Last name <span className='text-danger'>*</span></p>
           <input
             type="text"
             placeholder="Last name"
@@ -83,7 +83,7 @@ function SignupForm() {
           {errors.last_name && <small className="text-danger">{errors.last_name.message}</small>}
         </div>
         <div className="mb-3">
-          <p className="mb-2">Password *</p>
+          <p className="mb-2">Password <span className='text-danger'>*</span></p>
           <input
             type="password"
             placeholder="Password (Must be 8 characters)"

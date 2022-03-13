@@ -13,28 +13,19 @@ import Login from './pages/Login/Login';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
-// import Login from './pages/Login/Login';
-// import Register from './pages/Register/Register';
 import { Routes, Route } from 'react-router-dom';
 
 config.autoAddCss = false;
-// JS: window.location.pathname ex: /, /shop, /about
+
 const pathname = window.location.pathname;
-const objectPath = {
-  '/': 'Homepage',
-  '/shop': 'Books',
-  '/about': 'About us',
-  '/cart': 'Cart'
-};
+
 
 function App() {
   return (
     <React.Fragment>
       <div className="d-flex flex-column m-height-100">
         <Header />
-        {pathname === '/about' ? <PageTitle title={objectPath[pathname]} /> : ''}
-
-        {/* Config Routes pages */}
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />

@@ -110,7 +110,7 @@ export default class Home extends React.Component {
         <div className="container">
           <div className="row align-items-center mb-4">
             <div className="col-lg-6">
-              <p>On Sale</p>
+              <h4>On Sale</h4>
             </div>
             <div className="col-lg-6 d-flex justify-content-end">
               <Link to={`/shop`}>
