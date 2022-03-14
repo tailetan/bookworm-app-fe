@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/style.css';
 import 'react-toastify/dist/ReactToastify.css';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 
 ReactDOM.render(
   // <React.StrictMode>

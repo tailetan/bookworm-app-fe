@@ -38,21 +38,24 @@ div .navbar-nav .nav-item a:hover {
     transition: background-color 400ms linear;
 }
 
-
 div .navbar-nav .nav-item:hover>a {
     color: #f0f0f0;
 }
 
 #accordion .card-body ul {
-    padding: 0px !important;
-    margin: 0px !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 #accordion .card-body ul li:hover {
     background-color: var(--darkblue);
-    ;
     color: #f0f0f0;
-    border-radius: 0.1rem;
+    border-radius: 0.5rem;
+    transition: color .3s ease, background-color .5s linear;
+}
+
+#accordion .card-body ul li {
+    padding: 4px 6px;
 }
 
 .border-right {
@@ -62,6 +65,7 @@ div .navbar-nav .nav-item:hover>a {
 .activetab {
     color: var(--darkblue);
 }
+
 
 /* .navbar>.container,
 .navbar>.container-fluid,

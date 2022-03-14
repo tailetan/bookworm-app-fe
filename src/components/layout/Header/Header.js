@@ -14,15 +14,13 @@ import {
   Button,
   Fade
 } from 'reactstrap';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faHome, faShop, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { NavLink, Link } from 'react-router-dom';
 import Login from '../../../pages/Login/Login';
 import Signup from '../../../pages/Login/SignupForm';
-import Avatar from '../../../assets/avatar.png';
+import Avatar from '../../../assets/avatar.jpg';
 import { ToastContainer, toast } from 'react-toastify';
-
 import axios from 'axios';
 
 export default class Header extends React.Component {
@@ -41,9 +39,11 @@ export default class Header extends React.Component {
       isLogin: false,
       openMenu: false,
       name: '',
-      email: ''
+      email: '',
+      cart: 0
     };
   }
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
@@ -73,7 +73,7 @@ export default class Header extends React.Component {
     const token = localStorage.getItem('access_token');
     if (token !== null) {
       axios
-        .get('http://localhost:8000/api/user', {
+        .get(' http://localhost:8000/api/user', {
           headers: {
             Accept: 'application/json',
             Authorization: `Bearer ${token}`
@@ -101,7 +101,7 @@ export default class Header extends React.Component {
     const token = localStorage.getItem('access_token');
     if (token !== null) {
       axios
-        .get('http://localhost:8000/api/logout', {
+        .get(' http://localhost:8000/api/logout', {
           headers: {
             Accept: 'application/json',
             Authorization: `Bearer ${token}`
@@ -130,8 +130,18 @@ export default class Header extends React.Component {
     }
   }
 
+  checkCart() {
+    const cart = localStorage.getItem('cart');
+    if (cart !== null) {
+      this.setState({
+        cart: JSON.parse(cart).length
+      });
+    }
+  }
+
   componentDidMount() {
     this.checkLoginStatus();
+    this.checkCart();
   }
 
   render() {
@@ -166,7 +176,7 @@ export default class Header extends React.Component {
                 <NavItem className="me-3">
                   <NavLink className={({ isActive }) => (isActive ? ' active' : '')} to="/cart">
                     {' '}
-                    <FontAwesomeIcon icon={faCartShopping} /> Cart(0)
+                    <FontAwesomeIcon icon={faCartShopping} /> Cart ({this.state.cart})
                   </NavLink>
                 </NavItem>
                 {this.state.isLogin === false ? (
@@ -177,7 +187,7 @@ export default class Header extends React.Component {
                   </NavItem>
                 ) : (
                   <NavItem className="nav-item-user">
-                    <img src={Avatar} className="avatar-login" onClick={this.handleMenu}></img>
+                    <img src={Avatar} className="avatar-login" onClick={this.handleMenu} />
                     <Fade in={this.state.openMenu}>
                       <Card className="card-user">
                         <CardBody className="text-center">
