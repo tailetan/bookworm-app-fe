@@ -35,6 +35,7 @@ export default class Cart extends React.Component {
 
   updateLocalStorage(value) {
     localStorage.setItem('cart', JSON.stringify(value));
+    toast.dismiss();
     toast.success('Update cart successfully', {
       position: 'bottom-right',
       autoClose: 3000,
@@ -81,10 +82,22 @@ export default class Cart extends React.Component {
     const token = localStorage.getItem('access_token');
     let items = [...this.state.cart];
     if (items.length > 0 && token === null) {
-      // eslint-disable-next-line react/prop-types
       this.props.openModal();
     } else if (items.length > 0 && token !== null) {
-      console.log('Gui');
+        toast.dismiss();
+        toast.success('Placed order successfully', {
+          position: 'bottom-right',
+          autoClose: 10000, //wait for 10 seconds
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined
+        });
+        setTimeout(() => {
+            window.location.href = '/';
+            localStorage.removeItem('cart');
+          }, 10000); // redirect to homepage after 10 seconds
     }
   }
 

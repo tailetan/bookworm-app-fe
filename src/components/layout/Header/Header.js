@@ -19,7 +19,7 @@ import { faCartShopping, faHome, faShop, faCircleInfo } from '@fortawesome/free-
 import { NavLink, Link } from 'react-router-dom';
 import Login from '../../../pages/Login/Login';
 import Signup from '../../../pages/Login/SignupForm';
-import Avatar from '../../../assets/avatar.jpg';
+import Avatar from '../../../assets/avatar.png';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 
@@ -110,6 +110,7 @@ export default class Header extends React.Component {
         .then((response) => {
           if (response.data.message === 'Logged out!') {
             localStorage.removeItem('access_token');
+            toast.dismiss();
             toast.success('Logout successfully', {
               position: 'bottom-right',
               autoClose: 5000,

@@ -18,20 +18,20 @@ class MyDropdown extends React.Component {
   }
 
   changeTitle(title) {
-    this.setState((prevState) => ({
+    this.setState(() => ({
       title: title
     }));
   }
 
   render() {
-    const { list } = this.props;
+    const { list, handShow } = this.props;
     return (
       <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
         <DropdownToggle caret>{this.state.title}</DropdownToggle>
         <DropdownMenu container="body">
           {list.map((item, idx) => {
             return (
-              <DropdownItem key={idx} onClick={() => this.changeTitle(item)}>
+              <DropdownItem key={idx} onClick={() => handShow(item)}>
                 {item}
               </DropdownItem>
             );

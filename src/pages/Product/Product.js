@@ -16,6 +16,7 @@ import Book10 from '../../assets/bookcovers/book10.jpg';
 import defaultBookCover from '../../assets/bookcovers/defaultBookCover.png';
 import { ToastContainer, toast } from 'react-toastify';
 
+
 export default class Product extends React.Component {
   constructor(props) {
     super(props);
@@ -103,6 +104,7 @@ export default class Product extends React.Component {
       cartArray.push(cartObject);
       cartArray = cartArray.reverse();
       localStorage.setItem('cart', JSON.stringify(cartArray));
+      toast.dismiss();
       toast.success('Added successfully', {
         position: 'bottom-right',
         autoClose: 3000,
@@ -112,13 +114,13 @@ export default class Product extends React.Component {
         draggable: false,
         progress: undefined
       });
-      // eslint-disable-next-line react/prop-types
       this.props.checkCart();
     } else {
       let cartArray = [];
       cartArray.push(cartObject);
       cartArray = cartArray.reverse();
       localStorage.setItem('cart', JSON.stringify(cartArray));
+      toast.dismiss();
       toast.success('Added successfully', {
         position: 'bottom-right',
         autoClose: 3000,
@@ -128,7 +130,6 @@ export default class Product extends React.Component {
         draggable: false,
         progress: undefined
       });
-      // eslint-disable-next-line react/prop-types
       this.props.checkCart();
     }
   }
@@ -136,7 +137,7 @@ export default class Product extends React.Component {
   componentDidMount() {
     this.getDetail();
   }
-
+  
   render() {
     return (
       <section className="detail-page flex-grow-1">
@@ -159,7 +160,7 @@ export default class Product extends React.Component {
                         src={this.state.details.book_cover_photo}
                         alt="Books"
                       />
-                      <p className="author text-right mt-3">
+                      <p className="px-3 pb-3 author text-right mt-3">
                         By (author) <span>{this.state.details.author_name}</span>
                       </p>
                     </div>
@@ -181,7 +182,7 @@ export default class Product extends React.Component {
                   <div className="card-header">
                     <span
                       className={`price-first ${
-                        this.state.details.discount_price !== null ? 'price-first-line' : ''
+                        this.state.details.discount_price !== null ? 'price-first-line' : 'text-dark h4'
                       }`}>
                       $
                       {parseFloat(
@@ -240,7 +241,7 @@ export default class Product extends React.Component {
                     <div className="row star-row">
                       <div className="col-lg-2">
                         <p className="point font-24px">{this.state.details.avg_rating}</p>
-                        <p className="number">(3,134)</p>
+                        <p className="number">({this.state.details.total_review})</p>
                       </div>
                       <div className="col-lg-10">
                         <p className="point font-24px">Star</p>
@@ -254,124 +255,7 @@ export default class Product extends React.Component {
                       </div>
                     </div>
                     <br />
-                    {/* <div className="row">
-                      <div className="col-lg-6">
-                        <p>Showing 1-12 of 3134 reviews</p>
-                      </div>
-                      <div className="col-lg-6 d-flex justify-content-end">
-                        <div className="dropdown me-3">
-                          <MyDropdown
-                            title="Sort by"
-                            list={[
-                              'Sort by on sale',
-                              'Sort by date: newest to oldest',
-                              'Sort by date: oldest to newest'
-                            ]}
-                          />
-                        </div>
-
-                        <div className="dropdown">
-                          <MyDropdown
-                            title="Show"
-                            list={['Show 5', 'Show 15', 'Show 20', 'Show 25']}
-                          />
-                        </div>
-                      </div>
-                    </div> */}
-
-                    {/* <!-- Start 1 component --> */}
-                    {/* <div className="review-content">
-                      <p className="rc-title font-22px">
-                        Review Title <span> | 5 starts</span>
-                      </p>
-                      <p className="rc-content">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis numquam
-                        porro error totam, exercitationem optio blanditiis nostrum quia?
-                      </p>
-                      <p className="rc-day font-14px">Month Date, Year</p>
-                    </div> */}
-                    {/* <!-- End 1 component --> */}
-                    {/* <!-- Start 1 component --> */}
-                    {/* <div className="review-content">
-                      <p className="rc-title font-22px">
-                        Amazing Story! You will LOVE it <span> | 5 starts</span>
-                      </p>
-                      <p className="rc-content">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis numquam
-                        porro error totam, exercitationem optio blanditiis nostrum quia?
-                      </p>
-                      <p className="rc-day font-14px">April 12, 2021</p>
-                    </div> */}
-                    {/* <!-- End 1 component --> */}
-                    {/* <!-- Start 1 component --> */}
-                    {/* <div className="review-content">
-                      <p className="rc-title font-22px">
-                        Amazing Story! You will LOVE it <span> | 5 starts</span>
-                      </p>
-                      <p className="rc-content">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis numquam
-                        porro error totam, exercitationem optio blanditiis nostrum quia?
-                      </p>
-                      <p className="rc-day font-14px">April 12, 2021</p>
-                    </div> */}
-                    {/* <!-- End 1 component --> */}
-                    {/* <!-- Start 1 component --> */}
-                    {/* <div className="review-content">
-                      <p className="rc-title font-22px">
-                        Amazing Story! You will LOVE it <span> | 5 starts</span>
-                      </p>
-                      <p className="rc-content">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis numquam
-                        porro error totam, exercitationem optio blanditiis nostrum quia?
-                      </p>
-                      <p className="rc-day font-14px">April 12, 2021</p>
-                    </div> */}
-                    {/* <!-- End 1 component --> */}
-                    {/* <!-- Start 1 component --> */}
-                    {/* <div className="review-content">
-                      <p className="rc-title font-22px">
-                        Amazing Story! You will LOVE it <span> | 5 starts</span>
-                      </p>
-                      <p className="rc-content">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis numquam
-                        porro error totam, exercitationem optio blanditiis nostrum quia?
-                      </p>
-                      <p className="rc-day font-14px">April 12, 2021</p>
-                    </div> */}
-                    {/* <!-- End 1 component --> */}
-                    {/* <div className="row">
-                      <div className="col-12 d-flex justify-content-center">
-                        <nav>
-                          <ul className="pagination">
-                            <li className="page-item">
-                              <a className="text-color-black page-link" href="#">
-                                Previous
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="text-color-black page-link" href="#">
-                                1
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="text-color-black page-link" href="#">
-                                2
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="text-color-black page-link" href="#">
-                                3
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="text-color-black page-link" href="#">
-                                Next
-                              </a>
-                            </li>
-                          </ul>
-                        </nav>
-                      </div>
-                    </div> */}
+                    
                   </div>
                 </div>
               </div>
@@ -384,10 +268,8 @@ export default class Product extends React.Component {
                     <p>Add a title</p>
                     <input className="form-control" />
                     <br />
-                    <br />
                     <p>Details please! Your review helps other shoppers</p>
                     <textarea className="form-control"></textarea>
-                    <br />
                     <br />
                     <p>Select a rating star</p>
                     <select className="form-control">
