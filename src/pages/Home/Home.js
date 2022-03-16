@@ -113,8 +113,8 @@ export default class Home extends React.Component {
               <h4>On Sale</h4>
             </div>
             <div className="col-lg-6 d-flex justify-content-end">
-              <Link to={`/shop`}>
-                <Button color="secondary" size="sm">
+              <Link to="/shop">
+                <Button color="secondary" size="sm" to="/shop">
                   View All &nbsp; <i className="fas fa-angle-right"></i>
                 </Button>
               </Link>
@@ -130,7 +130,25 @@ export default class Home extends React.Component {
             autoplay={{
               delay: 4000,
               disableOnInteraction: false
-            }}>
+            }}
+            breakpoints={{
+                "@0.00": {
+                  slidesPerView: 1,
+                  spaceBetween: 10,
+                },
+                "@0.75": {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                "@1.00": {
+                  slidesPerView: 3,
+                  spaceBetween: 40,
+                },
+                "@1.50": {
+                  slidesPerView: 4,
+                  spaceBetween: 50,
+                },
+              }}>
             {this.state.onSaleBooks.map((book, idx) => {
               return (
                 <SwiperSlide key={idx} className="carousel">
