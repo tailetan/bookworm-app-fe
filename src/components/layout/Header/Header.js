@@ -206,7 +206,7 @@ export default class Header extends React.Component {
             </Collapse>
           </div>
         </Navbar>
-        <Modal isOpen={this.state.modal} toggle={this.handleModal}>
+        <Modal isOpen={this.state.modal} >
           <ModalHeader toggle={this.handleModal}>
             <div className="d-flex">
               <div className="flex-grow-1 text-center pointer border-right" onClick={this.setForm}>

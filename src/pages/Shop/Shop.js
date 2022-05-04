@@ -255,8 +255,8 @@ export default class Shop extends React.Component {
   }
   render() {
     return (
-      <section className="shop-page flex-grow-1">
-        <div className="container">
+      <section className=" shop-page flex-grow-1">
+        <div className="container-fluid">
           <div className="title-page">
           <p>
               Books{' '}
@@ -339,7 +339,7 @@ export default class Shop extends React.Component {
                       </p>
                     </div>
                     <div className="col-lg-6 d-flex justify-content-end">
-                      <div className="dropdown me-3">
+                      <div className="dropdown mr-3">
                         <MyDropdown
                           title="Sort by"
                           list={[

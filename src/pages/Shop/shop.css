@@ -3,7 +3,9 @@
     padding: 2rem 0;
     border-bottom: 0.1rem solid var(--light-gray);
 }
-
+.container-fluid{
+    padding: 0px 80px!important;
+}
 .shop-page a,
 .shop-page a:hover {
     color: inherit;

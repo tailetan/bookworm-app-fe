@@ -182,7 +182,7 @@ export default class Product extends React.Component {
                   <div className="card-header">
                     <span
                       className={`price-first ${
-                        this.state.details.discount_price !== null ? 'price-first-line' : 'text-dark h4'
+                        this.state.details.discount_price !== null ? 'price-first-line mr-3' : 'text-dark h4'
                       }`}>
                       $
                       {parseFloat(
